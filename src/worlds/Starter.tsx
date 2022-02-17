@@ -1,13 +1,14 @@
-import { Spinning, Floating, StandardEnvironment } from "spacesvr";
+import { Spinning, Floating, StandardEnvironment, Text } from "spacesvr";
+//to get data from api
+import axios from "axios";
 import TransparentFloor from "../ideas/TransparentFloor";
 import CloudySky from "../ideas/CloudySky";
 import Cubes from "../ideas/Cubes";
-import Textotes from "./Textosf";
+import Textotes from "../ideas/Textosf";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect,useMemo } from "react";
 
-//to get data from api
-import axios from "axios";
+
 
 
 export default function Starter() {
@@ -41,7 +42,7 @@ export default function Starter() {
       setStocks(resp.data);
       //iterate the results
       resp.data.forEach((element: any) => {
-        console.log("dato traido");
+        console.log("dato traido 6688");
         console.log(element);
         arr.push({ indice: 1, titulo: element.name });
       });
@@ -59,29 +60,41 @@ export default function Starter() {
     }
   };
 
-  //fetchData(); //call the fetch method
-  useEffect(() => {
+//  const pasito1 = async () => {
+//    const sera = await fetchData();
+//  }
+
+
+  fetchData(); //call the fetch method
+ 
+ /* useEffect(() => {
     fetchData();
+  
+  }, []);
+*/
+
+  const arrStocks: Libro[] = useMemo(() => {
+    const arr2: Libro[] = [];
+    console.log("revisar lo que trae stocks, if any");
+    stocks.forEach((element: any) => {
+      console.log("elemento es");
+      console.log(element);
+      arr2.push({ indice: 1, titulo: element.name });
+    });
+
+    return arr2;
   }, []);
 
-  const otro: Libro = { indice: 2, titulo: "este sea romantico" };
-  const COUNT = 150;
 
-  const arrLibros: Libro[] = [];
-  for (let i = 0; i < COUNT; i++) {
-    arrLibros.push({
-      indice: 5,
-      //      titulo: "este es el amorrrs"
-      titulo: arribotota[1].titulo
-    });
-  }
+
   //END  new code to get text from api
   
   return (
     <StandardEnvironment>
       <ambientLight />
-      <Cubes />      
-      <Textotes parametrito={otro} libros={arrLibros} stocks={stocks} />
+      <Cubes />  
+      <Textotes stocks={arr} /> 
+        
       <group position={[0, 0, -4]}>
         <Floating>
           <Spinning xSpeed={0.2} ySpeed={0.4} zSpeed={0.3}>
