@@ -13,7 +13,7 @@ type Cube = {
   speed: number;
 };
 
-const Cubes = (props) => {
+const Cubes = () => {
   const cubes: Cube[] = useMemo(() => {
     const arr: Cube[] = [];
     for (let i = 0; i < COUNT; i++) {
